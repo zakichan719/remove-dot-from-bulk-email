@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>•points•</title>
+</head>
+<style>
+   button {
+    width: 17%;
+    padding: 3px;
+    margin: 5px;
+    background-color: black;
+    color: white;
+    cursor: pointer;
+}
+body {
+    background-color: whitesmoke;
+}
+</style>
+<body>
+
+<center> 
+<br> <button onclick="dotfunction()">Add point to email •</button> 
+<br> <button onclick="removedots()">Remove points from emails ••</button>
+<br><button onclick="copy()">Copy result</button> <br> <br>  
+<textarea name="" id="textarea" cols="60" rows="50" placeholder="user@gmail.com" ></textarea> 
+ 
+
+</center>
+
+<script>
+function removedots(){
+  var newuser ="";
+  var lines = document.getElementById('textarea').value.split('\n');
+  for (let i = 0; i < lines.length; i++) {
+  
+  
+  
+  
+   if(i==lines.length-1){  
+
+		newuser+=lines[i].split('@')[0].replaceAll(".", "")+"@gmail.com"  ;
+ 
+	}
+	else{
+
+	    newuser+=lines[i].split('@')[0].replaceAll(".", "")+"@gmail.com"+"\n" ; 
+
+	}
+  
+  
+  
+  }
+  
+  document.getElementById('textarea').value= newuser;
+
+
+}
+
+function copy(){
+   var input = document.getElementById('textarea').value;
+   navigator.clipboard.writeText(input);
+     
+
+}
+
+function dotfunction(){
+    
+var lines = document.getElementById('textarea').value.split('\n');
+
+
+var email ="";
+var username ="" ;
+var tryname ="" ;
+var usernamelength ="";
+var newuser ="";
+var newinput ="";
+
+
+for (let i = 0; i < lines.length; i++) {
+
+ newuser ="";
+  
+ username = lines[i].split('@')[0] ;
+ dotcount  = lines[i].split('@')[0].split('.');
+ 
+ 
+ if(((username.length)-dotcount.length)<dotcount.length)
+ {
+  newuser=username
+ }
+ else
+ {
+
+ usernamelength = (username.length)-1;
+ var rand =Math.floor(Math.random() * usernamelength)
+ 
+ tryname=0
+ 
+
+ while((username[rand] =="."||username[rand+1] =="." )&&tryname<usernamelength){
+   
+   rand = Math.floor(Math.random() * usernamelength)
+   
+   if(username[rand] !="."&&username[rand+1] !=".")
+   {
+    break
+   }
+   
+    
+   tryname++;
+ }
+
+ 
+
+
+
+
+for (let j = 0; j < usernamelength+1; j++) {
+
+   if(j==rand)
+   {
+      newuser+=(username[j]+".").replace("..", ".")
+   }
+   else
+   {
+      newuser+=username[j]
+   }
+   
+ }
+
+
+
+}
+
+
+if(i==lines.length-1){  
+
+newinput+=newuser.replace("..", ".")+"@gmail.com"  ;
+ 
+}
+else{
+
+newinput+=newuser.replace("..", ".")+"@gmail.com"+"\n" ; 
+
+}
+
+
+}
+
+
+
+document.getElementById('textarea').value=newinput;
+
+
+}
+
+</script>
+</body>
+</html>
